@@ -2,7 +2,6 @@ package br.com.fiap.janusGs;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import br.com.fiap.janusGs.model.Paciente;
 import br.com.fiap.janusGs.service.PacienteService;
