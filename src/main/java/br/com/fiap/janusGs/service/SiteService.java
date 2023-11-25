@@ -7,38 +7,35 @@ import br.com.fiap.janusGs.data.SiteDao;
 import br.com.fiap.janusGs.model.Paciente;
 import br.com.fiap.janusGs.model.Site;
 
-
 public class SiteService {
-	
-	public static boolean create(Site site) {
-		if(!validar(site)) {
-			return false;
-		}
-		
-		try {
-			SiteDao.create(site);
-		}
-		catch(Exception e){	
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-		
-	}
 
-	private static boolean validar(Site site) {
-		if(site.getMedico() == null) return false;
-		try {
-			// Procura se o email do paciente existe
-			var clientes = PacienteDao.findAll();
-			for (Paciente clienteProcurado : clientes) {
-				if(clienteProcurado.getDsEmail().equals(site.getPaciente().getDsEmail())) return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return false;
-	}
+    public static boolean create(Site site) {
+        try {
+            validar(site);
+            SiteDao.create(site);
+            return true;
+        } catch (ClassNotFoundException | SQLException e) {
+            handleException(e);
+            return false;
+        }
+    }
 
+    private static void validar(Site site) throws ClassNotFoundException, SQLException {
+        if (site.getMedico() == null) {
+            throw new IllegalArgumentException("O site deve ter um médico associado.");
+        }
+
+        var pacientes = PacienteDao.findAll();
+        for (Paciente paciente : pacientes) {
+            if (paciente.getDsEmail().equals(site.getPaciente().getDsEmail())) {
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException("O paciente associado ao site não existe.");
+    }
+
+    private static void handleException(Exception e) {
+        e.printStackTrace(); 
+    }
 }

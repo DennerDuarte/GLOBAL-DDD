@@ -6,10 +6,10 @@ public class Paciente {
 	private String dtNascimento;
 	private String cpf;
 	private String dsEmail;
-	private int dsPeso;
-	private int dsAltura;
+	private Double dsPeso;
+	private Double dsAltura;
 
-	public Paciente(int idPaciente, String nmPaciente, String dtNascimento, String cpf, String dsEmail, int dsPeso, int dsAltura) {
+	public Paciente(int idPaciente, String nmPaciente, String dtNascimento, String cpf, String dsEmail, Double dsPeso, Double dsAltura) {
 		super();
 		this.idPaciente = idPaciente;
 		this.nmPaciente = nmPaciente;
@@ -20,19 +20,19 @@ public class Paciente {
 		this.dsAltura = dsAltura;
 	}
 	
-	public int getDsPeso() {
+	public Double getDsPeso() {
 		return dsPeso;
 	}
 
-	public void setDsPeso(int dsPeso) {
+	public void setDsPeso(Double dsPeso) {
 		this.dsPeso = dsPeso;
 	}
 
-	public int getDsAltura() {
+	public Double getDsAltura() {
 		return dsAltura;
 	}
 
-	public void setDsAltura(int dsAltura) {
+	public void setDsAltura(Double dsAltura) {
 		this.dsAltura = dsAltura;
 	}
 	
